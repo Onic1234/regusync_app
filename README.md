@@ -1,319 +1,73 @@
-# 🚀 **ReguSync: Proposal Lengkap Aplikasi Mobile Kompetisi**
-> *"Waze-nya Regulasi Indonesia: Satu-satunya platform mobile yang memetakan 251.000+ regulasi Indonesia secara real-time, membantu UMKM menghindari denda hingga Rp50 juta/tahun karena ketidaktahuan aturan lokal."*
+# 🚀 ReguSync (Waze-nya Regulasi Indonesia)
 
----
+**ReguSync** adalah platform mobile inovatif yang memetakan lebih dari 251.000 regulasi di seluruh Indonesia secara real-time. Aplikasi ini dirancang khusus untuk membantu UMKM memahami aturan lokal dan perizinan usaha dengan mudah, sehingga terhindar dari denda atau masalah hukum karena ketidaktahuan.
 
-## 📋 **1. PROBLEM STATEMENT (Yang Bikin Juri "Wow")**
+## ✨ Fitur Utama (Fase MVP)
 
-### ❌ Fakta Pahit yang Belum Terpecahkan:
-| Masalah | Data Pendukung | Dampak ke UMKM |
-|---------|---------------|----------------|
-| **Fragmentasi Regulasi** | Indonesia punya 251.000+ regulasi tersebar di pusat-daerah, sering tumpang tindih | UMKM bingung: *"Aturan mana yang berlaku untuk usaha saya di Kabupaten X?"* |
-| **Akses Informasi Terbatas** | 60% UMKM belum paham proses perizinan digital OSS [[17]] | Terjebak birokrasi, bayar calo, atau malah kena denda |
-| **Perubahan Aturan Cepat** | Regulasi daerah bisa berubah kapan saja, tidak ada notifikasi terpusat | UMKM tidak sadar aturan baru → pelanggaran tidak disengaja |
-| **Bahasa Hukum yang Rumit** | Dokumen regulasi penuh jargon teknis, tidak ramah UMKM | Butuh konsultan hukum (biaya Rp500rb-5jt/konsultasi) |
+- 🗺️ **Peta Regulasi Hyperlocal**: Visualisasi spasial aturan dan izin usaha yang berlaku berdasarkan lokasi pengguna.
+- 🤖 **Chatbot Hukum Cerdas**: Asisten virtual yang siap menjawab pertanyaan seputar izin usaha dan pajak (akan mendukung bahasa daerah).
+- 📵 **Offline-First Architecture**: Memungkinkan pengguna mengakses regulasi inti tanpa koneksi internet (disinkronkan dengan Hive cache).
+- 📊 **Simulator Dampak Regulasi**: Membantu UMKM mengetahui estimasi perizinan, biaya, dan waktu jika ingin memperluas usahanya.
 
-### 💡 Insight Kunci:
-> *"UMKM tidak butuh tahu SEMUA regulasi. Mereka butuh tahu: **ATURAN APA YANG BERLAKU UNTUK SAYA, DI LOKASI SAYA, HARI INI**."*
+## 🛠️ Tech Stack
 
----
+Aplikasi ini dibangun menggunakan framework dan *package* modern:
+- **Frontend**: [Flutter](https://flutter.dev/)
+- **State Management**: [Riverpod](https://pub.dev/packages/flutter_riverpod)
+- **Pemetaan**: `flutter_map`, `latlong2`, `geolocator`
+- **Penyimpanan Offline**: `hive`, `hive_flutter`
+- **Jaringan & API**: `http`, `connectivity_plus`
+- **UI & UX**: `google_fonts`, `flutter_svg`, `shimmer`
 
-## 👥 **2. TARGET USER PERSONAS**
+## 📁 Struktur Direktori Project
 
-### 🎯 Primary: "Bu Siti, Pedagang Kopi Keliling"
-```
-📍 Lokasi: Kabupaten Sleman, Yogyakarta
-💼 Usaha: Kedai kopi rumahan, omzet Rp15jt/bulan
-📱 Tech Literacy: Bisa WhatsApp, belum pernah pakai OSS
-😫 Pain Point: 
-   - "Saya dengar ada aturan baru soal izin makanan, tapi nggak ngerti caranya"
-   - "Takut kena razia, tapi nggak tahu harus urus apa"
-   - "Nanya ke dinas, jawabannya beda-beda tiap orang"
-```
+Project ini mengadopsi struktur berbasis fitur (*feature-first*) agar lebih mudah diskalakan:
 
-### 🎯 Secondary: "Pak Budi, Konsultan UMKM"
-```
-📍 Lokasi: Jakarta
-💼 Profesi: Pendamping 50+ UMKM
-😫 Pain Point:
-   - "Harus cek regulasi 34 provinsi manual, makan waktu 3-4 jam/klien"
-   - "Tidak ada tools untuk track perubahan aturan daerah"
-   - "Klien sering salah paham karena penjelasan hukum terlalu teknis"
-```
-
----
-
-## ✨ **3. UNIQUE VALUE PROPOSITION & NOVELTY**
-
-### 🔥 Apa yang Membuat ReguSync BEDA?
-
-| Fitur | Kompetitor Existing (PrivyID, Legalku, eCLIS) | ReguSync (Novelty) |
-|-------|---------------------------------------------|-------------------|
-| 🗺️ **Peta Regulasi Hyperlocal** | Pencarian berbasis kata kunci [[9]] | Visualisasi spasial: *"Tunjukkan aturan yang berlaku di radius 5km dari lokasi saya"* |
-| 🔔 **Notifikasi Perubahan Aturan** | Tidak ada | Push notification berbasis lokasi + sektor usaha: *"Perda No. X/2026 tentang warung makan berlaku mulai 1 Mei"* |
-| 🤖 **Chatbot Hukum Bahasa Daerah** | Chatbot umum (bahasa Indonesia formal) | NLP lightweight untuk Jawa/Sunda/Batak: *"Piye carane urus PIRT, Mas?"* |
-| 📊 **Simulator Dampak Regulasi** | Tidak ada | *"Jika saya tambah varian makanan, izin apa saja yang perlu ditambah? Estimasi biaya & waktu?"* |
-| 📵 **Offline-First Architecture** | Cloud-only | Bisa akses regulasi inti tanpa internet, sync saat ada sinyal [[17]] |
-
-### 🏆 Why This Wins Competitions:
-✅ **Problem-First**: Menjawab pain point nyata 64 juta UMKM [[1]]  
-✅ **Tech Innovation**: Hybrid offline-online + NLP bahasa daerah = technically challenging tapi feasible untuk mahasiswa  
-✅ **Impact Measurable**: "Mengurangi waktu riset regulasi dari 3 jam → 3 menit"  
-✅ **Policy Alignment**: Mendukung program **Satu Data Indonesia** & **GovTech INA**  
-
----
-
-## 🛠️ **4. TECHNICAL ARCHITECTURE (Student-Friendly Stack)**
-
-### 📱 Frontend: Flutter (Cross-Platform)
-```dart
-// Contoh struktur project ReguSync
+```text
 lib/
-├── main.dart
-├── features/
-│   ├── regulation_map/     # Peta interaktif regulasi
-│   ├── chatbot/           # Voice/text chatbot hukum
-│   ├── simulator/         # Kalkulator dampak regulasi
-│   └── offline_cache/     # Manajemen data offline
-├── core/
-│   ├── services/          # API clients (OSS, JDIH, dll)
-│   ├── models/            # Regulation, User, Location
-│   └── utils/             # NLP helper, location utils
-└── config/
-    ├── flavors/           # Dev/Staging/Prod
-    └── constants.dart     # API keys, feature flags
+├── core/                  # Komponen inti aplikasi
+│   ├── models/            # Struktur data (User, Regulation, dll)
+│   ├── services/          # Integrasi API, database, dll
+│   └── utils/             # Helper, constants, formatters
+├── features/              # Fitur-fitur utama aplikasi
+│   ├── chatbot/           # UI & logic untuk asisten hukum
+│   ├── offline_cache/     # Manajemen sinkronisasi offline
+│   ├── onboarding/        # Flow perkenalan & pengaturan lokasi UMKM
+│   └── regulation_map/    # Visualisasi regulasi di peta
+├── widgets/               # Komponen UI yang dapat digunakan ulang (reusable)
+└── main.dart              # Titik masuk aplikasi
 ```
 
-### ⚙️ Backend & Services:
-| Komponen | Teknologi | Alasan Pemilihan |
-|----------|-----------|-----------------|
-| **Database** | Firebase Firestore + Hive (offline) | Gratis tier, real-time sync, mudah untuk MVP |
-| **Map Engine** | Mapbox GL Native | Custom style untuk visualisasi regulasi, offline tiles |
-| **NLP/Chatbot** | TensorFlow Lite + rule-based engine | On-device inference, tidak butuh server mahal |
-| **Regulation Data** | Scraper JDIH + OSS API + crowdsourcing | Multi-source untuk coverage 251K+ regulasi |
-| **Auth** | Firebase Auth + OTP | Simple, aman, support no-email users |
+## 🚀 Panduan Memulai (Getting Started)
 
-### 🔄 Data Flow Sederhana:
-```
-[User Location + Usaha Type] 
-       ↓
-[Query: "Regulasi apa yang berlaku?"] 
-       ↓
-[Check Offline Cache] → [Jika ada: tampilkan instan]
-       ↓
-[Jika tidak: Fetch dari Cloud] → [Sync ke Cache]
-       ↓
-[Display: Peta + Checklist + Chatbot Suggestion]
-```
+### Prasyarat
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (kompatibel dengan Dart `>=3.11.4`)
+- IDE (VS Code / Android Studio)
+- Emulator Android/iOS atau perangkat asli
 
----
+### Instalasi dan Menjalankan Project
 
-## 🎯 **5. MVP SCOPE (Yang Bisa Kamu Build dalam 1 Semester)**
+1. **Clone repositori**
+   ```bash
+   git clone https://github.com/Onic1234/regusync_app.git
+   cd regusync_app
+   ```
 
-### ✅ Fitur Wajib untuk Kompetisi:
-1. **Onboarding Sederhana**
-   - Pilih lokasi (GPS/manual)
-   - Pilih jenis usaha (dropdown: makanan, jasa, retail, dll)
-   - Estimasi: 2 hari development
+2. **Unduh dependencies**
+   ```bash
+   flutter pub get
+   ```
 
-2. **Peta Regulasi Mini (1 Provinsi Pilot)**
-   - Fokus Jawa Tengah dulu (data lebih lengkap)
-   - Tampilkan 3 layer: Izin Usaha, Pajak Daerah, Kesehatan
-   - Estimasi: 1 minggu
+3. **Jalankan Code Generation (Freezed / JSON Serializable)**
+   Karena project ini menggunakan `freezed` dan `json_serializable`, jalankan perintah berikut untuk meng-generate model:
+   ```bash
+   dart run build_runner build -d
+   ```
 
-3. **Chatbot Rule-Based (50+ Pertanyaan Umum)**
-   - Pattern matching untuk FAQ: *"Cara urus PIRT?", "Berapa pajak warung?"*
-   - Bahasa Indonesia + 1 bahasa daerah (Jawa)
-   - Estimasi: 1 minggu
+4. **Jalankan aplikasi**
+   ```bash
+   flutter run
+   ```
 
-4. **Offline Cache untuk 100 Regulasi Inti**
-   - Download paket regulasi provinsi pilihan
-   - Bisa akses tanpa internet
-   - Estimasi: 3 hari
-
-5. **Simulator Sederhana**
-   - Input: *"Saya mau jual makanan online"*
-   - Output: Checklist 5 izin wajib + link ke form OSS
-   - Estimasi: 2 hari
-
-### 🚀 Fitur "Wow" untuk Final Round:
-- Voice input chatbot
-- Notifikasi perubahan aturan
-- Export laporan untuk konsultan
-
----
-
-## 📊 **6. DATA STRATEGY: Dari Mana Dapat 251.000+ Regulasi?**
-
-### 🔄 Multi-Source Pipeline:
-```
-1. [OFFICIAL] JDIH Nasional & Daerah (jdih.go.id, jdih.[provinsi].go.id)
-   → Scraper Python + scheduled job (GitHub Actions)
-
-2. [OFFICIAL] OSS API (oss.go.id) 
-   → Integrasi resmi untuk data perizinan
-
-3. [CROWD] Validasi Komunitas
-   → Fitur "Laporkan Perubahan" untuk pengguna terverifikasi
-
-4. [PARTNER] Kolaborasi dengan Hukumonline/eCLIS 
-   → Data sharing untuk non-commercial use
-```
-
-### 🧹 Data Cleaning Challenge:
-```python
-# Contoh preprocessing regulasi
-def clean_regulation(text):
-    # 1. Extract metadata (nomor, tahun, instansi)
-    # 2. Remove boilerplate (kop surat, tanda tangan)
-    # 3. Segment per pasal
-    # 4. Tagging: sektor, lokasi, kata kunci
-    # 5. Generate summary bahasa UMKM
-    return structured_regulation
-```
-
-### 💡 Pro Tip untuk Mahasiswa:
-> *"Jangan coba scrape SEMUA regulasi di awal. Fokus ke 1 provinsi + 3 sektor usaha dulu. Quality > Quantity untuk MVP."*
-
----
-
-## 🧪 **7. VALIDATION & TESTING PLAN**
-
-### 🔍 Validasi Masalah (Sebelum Coding):
-```
-✅ Wawancara 10 UMKM di sekitar kampus:
-   - "Pernah bingung urus izin usaha?"
-   - "Apa sumber informasi regulasi yang Anda pakai?"
-   - "Jika ada app yang kasih tahu aturan lokal, fitur apa yang paling penting?"
-
-✅ Survey 50 responden via Google Form:
-   - Rank pain points
-   - Willingness to pay (untuk validasi monetisasi)
-```
-
-### 🧪 Testing Teknis:
-| Jenis Test | Tools | Target |
-|------------|-------|--------|
-| Unit Test | flutter_test | 80% coverage fitur inti |
-| Integration Test | Flutter Driver | Flow onboarding → peta regulasi |
-| Offline Test | Network Link Conditioner | App tetap berfungsi tanpa internet |
-| Usability Test | 5 pengguna UMKM | Task completion rate >90% |
-
-### 📈 Success Metrics:
-```dart
-// Contoh metric yang bisa di-track
-class ImpactMetrics {
-  final double timeSaved; // "3 jam → 3 menit"
-  final int regulationsCovered; // "100 regulasi inti di MVP"
-  final double userSatisfaction; // Survey score 1-5
-  final int potentialFinesAvoided; // Estimasi berdasarkan studi kasus
-}
-```
-
----
-
-## 🎤 **8. COMPETITION PITCH FRAMEWORK (60 Detik Elevator Pitch)**
-
-```
-🎯 Hook (10 detik):
-"Setiap tahun, ribuan UMKM di Indonesia kena denda bukan karena nakal, 
-tapi karena tidak tahu aturan lokal yang berubah-ubah."
-
-💡 Solution (20 detik):
-"ReguSync adalah aplikasi mobile pertama yang memetakan regulasi Indonesia 
-secara real-time berbasis lokasi. Cukup buka app, pilih usaha Anda, 
-dan ReguSync akan tunjukkan: aturan apa yang berlaku, bagaimana caranya, 
-dan kapan berubah — bahkan tanpa internet."
-
-🚀 Traction (15 detik):
-"Dalam MVP, kami sudah validasi ke 10 UMKM di Jawa Tengah: 
-9 dari 10 bilang 'ini yang saya cari'. Teknisnya, kami pakai Flutter + 
-TensorFlow Lite untuk chatbot bahasa daerah, dan arsitektur offline-first 
-untuk daerah sinyal terbatas."
-
-🌍 Impact (15 detik):
-"Jika diadopsi 1% UMKM Indonesia, ReguSync bisa hemat waktu riset regulasi 
-1,2 juta jam/tahun dan cegah potensi denda Rp500 miliar. 
-Kami mencari partner untuk pilot project di 3 kabupaten."
-```
-
----
-
-## ⚠️ **9. RISK MITIGATION**
-
-| Risiko | Mitigation Strategy |
-|--------|-------------------|
-| **Data regulasi tidak lengkap** | Start dengan 1 provinsi pilot; gunakan crowdsourcing untuk update |
-| **Akurasi chatbot hukum** | Tambahkan disclaimer + fitur "konsultasi ke ahli" untuk kasus kompleks |
-| **Adopsi UMKM rendah** | Desain UI super sederhana; kolaborasi dengan dinas UMKM untuk sosialisasi |
-| **Perubahan kebijakan OSS** | Arsitektur modular: ganti API source tanpa rewrite seluruh app |
-| **Monetisasi tidak jelas** | Model freemium: gratis untuk UMKM, premium untuk konsultan/dinas |
-
----
-
-## 💰 **10. SUSTAINABILITY & MONETIZATION**
-
-### 🔄 Model Bisnis Jangka Panjang:
-```
-🆓 GRATIS untuk:
-   - UMKM individu (fitur dasar: cek regulasi + chatbot)
-
-💼 PREMIUM untuk:
-   - Konsultan UMKM: Rp99rb/bulan → akses simulator advanced + export laporan
-   - Dinas Daerah: Custom dashboard untuk monitoring kepatuhan UMKM
-
-🤝 PARTNERSHIP:
-   - Bank/OJK: Integrasi data kepatuhan untuk penilaian kredit UMKM
-   - Marketplace: Widget "Cek Kelayakan Usaha" untuk seller baru
-```
-
-### 🌱 Roadmap 3 Tahun:
-```
-2026: MVP Jawa Tengah + 3 sektor usaha
-2027: Ekspansi ke 10 provinsi + fitur voice multibahasa
-2028: Integrasi dengan sistem pemerintah (OSS, SIAP, dll) + AI predictive regulation
-```
-
----
-
-## 🎁 **BONUS: Checklist Submission Kompetisi**
-
-✅ **Proposal Dokumen**:
-- [ ] Problem statement dengan data sekunder (gunakan sumber [[1]][[17]])
-- [ ] User persona + journey map
-- [ ] Wireframe Figma (minimal 5 screen: onboarding, peta, chatbot, simulator, profile)
-- [ ] Technical architecture diagram
-- [ ] Impact metric & validation plan
-
-✅ **Demo Teknis**:
-- [ ] APK yang bisa diinstall (Flutter build apk)
-- [ ] Video demo 2 menit (screen recording + voiceover)
-- [ ] Repository GitHub dengan README yang jelas
-
-✅ **Pitch Deck** (10 slide maksimal):
-1. Cover + tagline
-2. Problem (dengan data)
-3. Solution (ReguSync)
-4. How it works (demo screenshot)
-5. Novelty vs existing
-6. Target market & traction
-7. Business model
-8. Team & expertise
-9. Ask (apa yang dibutuhkan dari juri)
-10. Thank you + contact
-
----
-
-> 💬 **Next Step untuk Kamu**:
-> 1. **Validasi cepat**: Tanya 3 teman/keluarga yang punya usaha kecil: *"Pernah bingung urus izin?"*
-> 2. **Sketch wireframe** di kertas: 3 screen utama yang paling penting
-> 3. **Setup project Flutter**: `flutter create regusync` — mulai dari onboarding screen
-> 4. **Cari dataset kecil**: Download 10 regulasi dari JDIH Jateng untuk prototyping
-
-Mau aku bantu:
-- 🎨 Bikin wireframe Figma sederhana?
-- 💻 Contoh kode Flutter untuk fitur peta regulasi?
-- 📝 Draft proposal kompetisi dalam format PDF?
-- 🗣️ Latihan pertanyaan juri yang mungkin ditanyakan?
-
-ReguSync punya potensi besar karena menggabungkan **impact sosial nyata** + **tantangan teknis yang feasible** untuk mahasiswa. Let's build something that matters! 🚀✨
+## 🤝 Kontribusi
+Project ini sedang dalam tahap awal (MVP) untuk pengembangan fitur-fitur seperti `onboarding` dan `regulation_map`. Silakan cek branch yang ada jika ingin berkontribusi atau laporkan isu di tab *Issues*.
